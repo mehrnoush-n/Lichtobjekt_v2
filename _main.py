@@ -55,14 +55,14 @@ def run():
                 if side == 'left':
                     
                     #cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
-                    cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                    cube.append(NewNurbsCurve(0,r1,-r1,    l-r,r1,-r1))
                     cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
-                    cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1 ))
+                    cube.append(NewNurbsCurve(0,w-r1,-r1,    l-r,w-r1,-r1 ))
 
                     #cube.append(NewNurbsCurve(r1,r,r1-h,    r1,w-r,r1-h))
-                    cube.append(NewNurbsCurve(0,r1,r1-h,    l,r1,r1-h))
+                    cube.append(NewNurbsCurve(0,r1,r1-h,    l-r,r1,r1-h))
                     cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
-                    cube.append(NewNurbsCurve(0,w-r1,r1-h,    l,w-r1,r1-h ))
+                    cube.append(NewNurbsCurve(0,w-r1,r1-h,    l-r,w-r1,r1-h ))
 
                     #cube.append(NewNurbsCurve(r1,r1,-h,    r1,r1,0))
                     cube.append(NewNurbsCurve(l-r1,w-r1,-h,    l-r1,w-r1,0))
