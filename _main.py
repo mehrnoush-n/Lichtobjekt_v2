@@ -197,9 +197,12 @@ def run():
                 cube.append(NewNurbsCurve(r1,w-r1,-r,    r1,w-r1,-h+r1))
                 cube.append(NewNurbsCurve(r1,0-yy,-r+zz,    r1,w-r-yy,-h+zz))
         for line in cube : 
-            vs.ExtrudeAlongPath(line, profile)
+            vs.NameClass('BIM-430_ELEKTRISCHE_ANLAGEN-4451_Allgemeinbeleuchtung')
+            structure = vs.ExtrudeAlongPath(line, profile)
+            vs.SetClass(structure,'BIM-430_ELEKTRISCHE_ANLAGEN-4451_Allgemeinbeleuchtung')
             vs.DelObject(line)
-            
+
+        vs.SetClass(objectHand, 'BIM-430_ELEKTRISCHE_ANLAGEN-4451_Allgemeinbeleuchtung')  
         
     
             
