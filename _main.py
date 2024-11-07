@@ -142,7 +142,9 @@ def run():
                     #dia_2
                     #cube.append(NewNurbsCurve(-r1+l ,0+d ,-r+d, -r1+l, w/2-r1+d ,-h+d))
                     #cube.append(NewNurbsCurve(-r1+l ,w-d ,-r+d, -r1+l, w/2+r1-d ,-h+d))
-                    
+
+            
+                   
             else:
                 
                 cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
@@ -158,7 +160,61 @@ def run():
                 #dia_2
                 cube.append(NewNurbsCurve(-r1+l ,0+yy ,-r+zz, -r1+l, w/2-r1+yy ,-h+zz))
                 cube.append(NewNurbsCurve(-r1+l ,w-yy ,-r+zz, -r1+l, w/2+r1-yy ,-h+zz))
+
+        elif form == 'Flach':
+            if type == 'non-cap':
+                if side == 'left':
+                    
+                    #cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
+                    cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                    cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
+                    cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1 ))
+
+                    #cube.append(NewNurbsCurve(r1,r,r1-h,    r1,w-r,r1-h))
+                    #cube.append(NewNurbsCurve(0,r1,r1-h,    l-r,r1,r1-h))
+                    #cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
+                    #cube.append(NewNurbsCurve(0,w-r1,r1-h,    l-r,w-r1,r1-h ))
+
+                    #cube.append(NewNurbsCurve(r1,r1,-h,    r1,r1,0))
+                    #cube.append(NewNurbsCurve(l-r1,w-r1,-h,    l-r1,w-r1,0))
+                    #cube.append(NewNurbsCurve(l-r1,r1,-h,    l-r1,r1,0))
+                    #cube.append(NewNurbsCurve(r1,w-r1,-h,    r1,w-r1,0 ))
+                    
+                else:
+                    
+                    cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
+                    cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                    #cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
+                    cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1 ))
+
+                    #cube.append(NewNurbsCurve(r1,r,r1-h,    r1,w-r,r1-h))
+                    #cube.append(NewNurbsCurve(r,r1,r1-h,    l,r1,r1-h))
+                    #cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
+                    #cube.append(NewNurbsCurve(r,w-r1,r1-h,    l,w-r1,r1-h ))
+
+                    #cube.append(NewNurbsCurve(r1,r1,-h,    r1,r1,0))
+                    #cube.append(NewNurbsCurve(l-r1,w-r1,-h,    l-r1,w-r1,0))
+                    #cube.append(NewNurbsCurve(l-r1,r1,-h,    l-r1,r1,0))
+                    #cube.append(NewNurbsCurve(r1,w-r1,-h,    r1,w-r1,0 ))
+                    
+            else:
                 
+                cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
+                cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
+                cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1 ))
+
+                #cube.append(NewNurbsCurve(r1,r,r1-h,    r1,w-r,r1-h))
+                #cube.append(NewNurbsCurve(r,r1,r1-h,    l-r,r1,r1-h))
+                #cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
+                #cube.append(NewNurbsCurve(r,w-r1,r1-h,    l-r,w-r1,r1-h ))
+
+                #cube.append(NewNurbsCurve(r1,r1,-h,    r1,r1,0))
+                #cube.append(NewNurbsCurve(l-r1,w-r1,-h,    l-r1,w-r1,0))
+                #cube.append(NewNurbsCurve(l-r1,r1,-h,    l-r1,r1,0))
+                #cube.append(NewNurbsCurve(r1,w-r1,-h,    r1,w-r1,0 ))
+
+
         else:
             angle = math.pi/2 - math.atan2(-h-r1, r1+w)
             zz = r1 * math.sin(angle)
