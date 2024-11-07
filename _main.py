@@ -36,6 +36,7 @@ def run():
         type = vs.Ptype
         side = vs.Pside
         form = vs.Pform
+        mat= vs.GetObject(vs.Pmaterial)
 
         r1 = r/2
         r2 = abs(r - 2*th)/2
@@ -257,8 +258,16 @@ def run():
             structure = vs.ExtrudeAlongPath(line, profile)
             vs.SetClass(structure,'BIM-430_ELEKTRISCHE_ANLAGEN-4451_Allgemeinbeleuchtung')
             vs.DelObject(line)
+            vs.SetObjMaterialHandle(structure, mat)
+
 
         vs.SetClass(objectHand, 'BIM-430_ELEKTRISCHE_ANLAGEN-4451_Allgemeinbeleuchtung')  
+        vs.DelObject(rec_1)
+        vs.DelObject(rec_2)
+        vs.DelObject(profile)
+        vs.SetObjMaterialHandle(structure, mat)
+
+        vs.Generate2DFrom3DComp(objectHand, 1,6, 1)
         
     
             
