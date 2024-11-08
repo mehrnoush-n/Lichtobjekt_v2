@@ -128,6 +128,7 @@ def run():
                     # delta y - up
                     cube_sec.append(NewNurbsCurve(r1_sec,r,-r1,    r1_sec,w-r,-r1))
                     cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
+                    
                     # delta y - down
                     cube_sec.append(NewNurbsCurve(r1_sec,r,r1-h,    r1_sec,w-r,r1-h))
                     cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
@@ -152,30 +153,28 @@ def run():
                 if side == 'right':
                     # delta y - up
                     cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
-                    # delta x - up
-                    cube.append(NewNurbsCurve(r,r1,-r1,    l-r,r1,-r1))
-                    # delta y - up
                     cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
-                    # delta x - up
-                    cube.append(NewNurbsCurve(r,w-r1,-r1,    l-r,w-r1,-r1 ))
+                    
                     
                     # delta y - down
                     cube.append(NewNurbsCurve(r1,r,r1-h,    r1,w-r,r1-h))
-                    # delta x - down
-                    cube.append(NewNurbsCurve(r,r1,r1-h,    l-r,r1,r1-h))
-                    # delta y - down
                     cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
+                    
+                    # delta x - up
+                    cube.append(NewNurbsCurve(r,r1,-r1,    l-r_sec,r1,-r1))
+                    cube.append(NewNurbsCurve(r,w-r1,-r1,    l-r_sec,w-r1,-r1 ))
+
                     # delta x - down
-                    cube.append(NewNurbsCurve(r,w-r1,r1-h,    l-r,w-r1,r1-h ))
+                    cube.append(NewNurbsCurve(r,r1,r1-h,    l-r_sec,r1,r1-h))
+                    cube.append(NewNurbsCurve(r,w-r1,r1-h,    l-r_sec,w-r1,r1-h ))
 
                     # delta z - left
                     cube.append(NewNurbsCurve(r1,r1,-h,    r1,r1,0))
-                    # delta z - right
-                    cube.append(NewNurbsCurve(l-r1,w-r1,-h,    l-r1,w-r1,0))
-                    # delta z - left
-                    cube.append(NewNurbsCurve(l-r1,r1,-h,    l-r1,r1,0))
-                    # delta z - right
                     cube.append(NewNurbsCurve(r1,w-r1,-h,    r1,w-r1,0 ))
+                    
+                    # delta z - right
+                    cube_sec.append(NewNurbsCurve(l-r1_sec,r1,-h,    l-r1_sec,r1,0))
+                    cube_sec.append(NewNurbsCurve(l-r1_sec,w-r1,-h,    l-r1_sec,w-r1,0))
 
                 
                 
