@@ -58,22 +58,33 @@ def run():
         rec_2 = vs.LNewObj()
         
         vs.Rect(-r1,-r1_sec,r1,r1_sec)
-        rec_1_sec = vs.LNewObj()
+        rec_1_sec_z = vs.LNewObj()
 
         # creating the interior rectangle of the profile
         vs.Rect(-r2,-r2_sec,r2,r2_sec)
-        rec_2_sec = vs.LNewObj()
+        rec_2_sec_z = vs.LNewObj()
+        
+        vs.Rect(-r1_sec,-r1,r1_sec,r1)
+        rec_1_sec_y = vs.LNewObj()
+
+        # creating the interior rectangle of the profile
+        vs.Rect(-r2_sec,-r2,r2_sec,r2)
+        rec_2_sec_y = vs.LNewObj()
 
 
 
         # creating the profile
         profile = vs.AddHole(rec_1, rec_2)[1]
-        profile_sec = vs.AddHole(rec_1_sec, rec_2_sec)[1]
+        profile_sec_z = vs.AddHole(rec_1_sec_z, rec_2_sec_z)[1]
+        profile_sec_y = vs.AddHole(rec_1_sec_y, rec_2_sec_y)[1]
         
         # Define cube as the list of lines to be extruded along the profile section at the end
         cube = []
         # # Define cube_sec as the list of lines to be extruded along the profile section at the end (for smaller sections)
-        cube_sec = []
+        # delta z
+        cube_sec_z = []
+        # delta y
+        cube_sec_y = []
         if form == 'Rechteck':
             if type == 'non-cap':
                 if side == 'left':
@@ -126,11 +137,11 @@ def run():
                 
                 if side == 'left': 
                     # delta y - up
-                    cube_sec.append(NewNurbsCurve(r1_sec,r,-r1,    r1_sec,w-r,-r1))
+                    cube_sec_y.append(NewNurbsCurve(r1_sec,r,-r1,    r1_sec,w-r,-r1))
                     cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
                     
                     # delta y - down
-                    cube_sec.append(NewNurbsCurve(r1_sec,r,r1-h,    r1_sec,w-r,r1-h))
+                    cube_sec_y.append(NewNurbsCurve(r1_sec,r,r1-h,    r1_sec,w-r,r1-h))
                     cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
 
                     # delta x - up
@@ -142,8 +153,8 @@ def run():
                     cube.append(NewNurbsCurve(r_sec,w-r1,r1-h,    l-r,w-r1,r1-h ))
 
                     # delta z - left
-                    cube_sec.append(NewNurbsCurve(r1_sec,r1,-h,    r1_sec,r1,0))
-                    cube_sec.append(NewNurbsCurve(r1_sec,w-r1,-h,    r1_sec,w-r1,0 ))
+                    cube_sec_z.append(NewNurbsCurve(r1_sec,r1,-h,    r1_sec,r1,0))
+                    cube_sec_z.append(NewNurbsCurve(r1_sec,w-r1,-h,    r1_sec,w-r1,0 ))
                     
                     # delta z - right
                     cube.append(NewNurbsCurve(l-r1,w-r1,-h,    l-r1,w-r1,0))
@@ -153,12 +164,12 @@ def run():
                 if side == 'right':
                     # delta y - up
                     cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
-                    cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
+                    cube_sec_y.append(NewNurbsCurve(l-r1_sec,r,-r1,    l-r1_sec,w-r,-r1))
                     
                     
                     # delta y - down
                     cube.append(NewNurbsCurve(r1,r,r1-h,    r1,w-r,r1-h))
-                    cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
+                    cube_sec_y.append(NewNurbsCurve(l-r1_sec,r,r1-h,    l-r1_sec,w-r,r1-h))
                     
                     # delta x - up
                     cube.append(NewNurbsCurve(r,r1,-r1,    l-r_sec,r1,-r1))
@@ -173,8 +184,8 @@ def run():
                     cube.append(NewNurbsCurve(r1,w-r1,-h,    r1,w-r1,0 ))
                     
                     # delta z - right
-                    cube_sec.append(NewNurbsCurve(l-r1_sec,r1,-h,    l-r1_sec,r1,0))
-                    cube_sec.append(NewNurbsCurve(l-r1_sec,w-r1,-h,    l-r1_sec,w-r1,0))
+                    cube_sec_z.append(NewNurbsCurve(l-r1_sec,r1,-h,    l-r1_sec,r1,0))
+                    cube_sec_z.append(NewNurbsCurve(l-r1_sec,w-r1,-h,    l-r1_sec,w-r1,0))
 
                 
                 
@@ -342,12 +353,21 @@ def run():
             # material
             vs.SetObjMaterialHandle(structure, mat)
         
-        if len(cube_sec):
-            for line in cube_sec:
+        if len(cube_sec_z):
+            for line in cube_sec_z:
                 # class 
                 vs.NameClass(class_name)
                 # extrusion
-                structure_sec = vs.ExtrudeAlongPath(line, profile_sec)
+                structure_sec = vs.ExtrudeAlongPath(line, profile_sec_z)
+                vs.SetClass(structure_sec,class_name)
+                vs.DelObject(line)
+                # material
+                vs.SetObjMaterialHandle(structure_sec, mat)
+            for line in cube_sec_y:
+                # class 
+                vs.NameClass(class_name)
+                # extrusion
+                structure_sec = vs.ExtrudeAlongPath(line, profile_sec_y)
                 vs.SetClass(structure_sec,class_name)
                 vs.DelObject(line)
                 # material
