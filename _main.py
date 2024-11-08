@@ -25,11 +25,15 @@ def run():
 
     # name of the class the PIO would be assigned to
     class_name = 'BIM-430_ELEKTRISCHE_ANLAGEN-4451_Allgemeinbeleuchtung'
+    #Datenbank for the Bahnsteig and Lichtobjekt PIOs
+    format_data_I = 'U-Bahn Station_I'
+    format_data_O = 'Lichtobjekt_O'
     
     objectName, objectHand, recordHand, wallHand = 0, 0, 0, 0
     ok, objectName, objectHand, recordHand, wallHand = vs.GetCustomObjectInfo( objectName, objectHand, recordHand, wallHand )
     if ok:
         # Retrieve the value of a parameter that is entered by the user
+        station = vs.Pstation
         h = vs.Pheight
         w = vs.Pwidth
         l = vs.Plength
@@ -471,6 +475,29 @@ def run():
         # 2D representation
         vs.Generate2DFrom3DComp(objectHand, 1,6, 1)
         
+        # Datenbank
+        vs.SetRecord(objectHand,format_data_O )
+        
+        vs.SetRField(objectHand, format_data_O, 'Station', station)        
+        vs.SetRField(objectHand, format_data_O, 'Form', form)
+        if type == 'non-cap':
+            typ = type
+        else:
+            if r == r_sec:
+                typ = 'cap-symmetrisch'
+            else : 
+                typ = 'cap-unsymmetrisch'
+        
+        vs.SetRField(objectHand, format_data_O, 'Type', typ)        
+        vs.SetRField(objectHand, format_data_O, 'Side', side)        
+        vs.SetRField(objectHand, format_data_O, 'Höhe', h)        
+        vs.SetRField(objectHand, format_data_O, 'Länge', l)        
+        vs.SetRField(objectHand, format_data_O, 'Breite', w)        
+        vs.SetRField(objectHand, format_data_O, 'Breite', w)        
+        vs.SetRField(objectHand, format_data_O, 'Profilstärke', th)        
+        vs.SetRField(objectHand, format_data_O, 'Profilgröße', r)        
+        vs.SetRField(objectHand, format_data_O, 'Profilgröße cap', r_sec)        
+        #vs.SetRField(objectHand, format_data_O, 'Material', mat)        
     
             
             
