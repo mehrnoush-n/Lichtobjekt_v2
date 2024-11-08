@@ -161,7 +161,7 @@ def run():
                     cube.append(NewNurbsCurve(l-r1,r1,-h,    l-r1,r1,0))
                     
                 
-                if side == 'right':
+                else:
                     # delta y - up
                     cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
                     cube_sec_y.append(NewNurbsCurve(l-r1_sec,r,-r1,    l-r1_sec,w-r,-r1))
@@ -228,39 +228,64 @@ def run():
             
             # form : gleichschenkliges Dreieck , type : cap   
             else:
-                # delta y - up
-                cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
-                # delta y - up
-                cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
+                if side == 'left':
+                    # delta y - up
+                    cube_sec_y.append(NewNurbsCurve(r1_sec,r,-r1,    r1_sec,w-r,-r1))
+                    # delta y - up
+                    cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
 
-                # delta x up
-                cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
-                # delta x - up
-                cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1))
-                # delta x - up
-                cube.append(NewNurbsCurve(0,(w)/2 , r1-h, l,(w)/2 ,r1-h))
-                #dia_1 left
-                cube.append(NewNurbsCurve(r1 ,0+yy ,-r+zz, r1, w/2-r1+yy ,-h+zz))
-                cube.append(NewNurbsCurve(r1 ,w-yy ,-r+zz, r1, w/2+r1-yy ,-h+zz))
-                #dia_2 right
-                cube.append(NewNurbsCurve(-r1+l ,0+yy ,-r+zz, -r1+l, w/2-r1+yy ,-h+zz))
-                cube.append(NewNurbsCurve(-r1+l ,w-yy ,-r+zz, -r1+l, w/2+r1-yy ,-h+zz))
+                    # delta x - up
+                    cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                    cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1))
+                    
+                    # delta x - down
+                    cube.append(NewNurbsCurve(0,(w)/2 , r1-h, l,(w)/2 ,r1-h))
+                    
+                    #dia_1 left
+                    cube_sec_z.append(NewNurbsCurve(r1_sec ,0+yy ,-r+zz, r1_sec, w/2-r1+yy ,-h+zz))
+                    cube_sec_z.append(NewNurbsCurve(r1_sec ,w-yy ,-r+zz, r1_sec, w/2+r1-yy ,-h+zz))
+                    
+                    #dia_2 right
+                    cube.append(NewNurbsCurve(-r1+l ,0+yy ,-r+zz, -r1+l, w/2-r1+yy ,-h+zz))
+                    cube.append(NewNurbsCurve(-r1+l ,w-yy ,-r+zz, -r1+l, w/2+r1-yy ,-h+zz))
+                
+                else : 
+                    # delta y - up
+                    cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
+                    # delta y - up
+                    cube_sec_y.append(NewNurbsCurve(l-r1_sec,r,-r1,    l-r1_sec,w-r,-r1))
+
+                    # delta x up
+                    cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                    # delta x - up
+                    cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1))
+                    # delta x - up
+                    cube.append(NewNurbsCurve(0,(w)/2 , r1-h, l,(w)/2 ,r1-h))
+                    #dia_1 left
+                    cube.append(NewNurbsCurve(r1 ,0+yy ,-r+zz, r1, w/2-r1+yy ,-h+zz))
+                    cube.append(NewNurbsCurve(r1 ,w-yy ,-r+zz, r1, w/2+r1-yy ,-h+zz))
+                    
+                    #dia_2 right
+                    cube_sec_z.append(NewNurbsCurve(-r1_sec+l ,0+yy ,-r+zz, -r1_sec+l, w/2-r1+yy ,-h+zz))
+                    cube_sec_z.append(NewNurbsCurve(-r1_sec+l ,w-yy ,-r+zz, -r1_sec+l, w/2+r1-yy ,-h+zz))
+
+                
 
         elif form == 'flach':
             if type == 'non-cap':
                 if side == 'left':
                     # up
                     # delta x
-                    cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                    #cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
                     # delta y
-                    cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
+                    #cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
                     # delta x
-                    cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1 ))
+                    #cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1 ))
                     
                     # down
-                    #cube.append(NewNurbsCurve(0,r1,r1-h,    l,r1,r1-h))
-                    #cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
-                    #cube.append(NewNurbsCurve(0,w-r1,r1-h,    l,w-r1,r1-h ))
+                    cube.append(NewNurbsCurve(0,r1,r1-h,    l,r1,r1-h))
+                    cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
+                    cube.append(NewNurbsCurve(0,w-r1,r1-h,    l,w-r1,r1-h ))
 
 
 
@@ -269,35 +294,52 @@ def run():
                 else:
                     # up
                     # delta y
-                    cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
+                    #cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
                     # delta x
-                    cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                    #cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
                     # delta x
-                    cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1 ))
+                    #cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1 ))
                     
                     # down
-                    #cube.append(NewNurbsCurve(r1,r,r1-h,    r1,w-r,r1-h))
-                    #cube.append(NewNurbsCurve(0,r1,r1-h,    l,r1,r1-h))
-                    #cube.append(NewNurbsCurve(0,w-r1,r1-h,    l,w-r1,r1-h ))
+                    cube.append(NewNurbsCurve(r1,r,r1-h,    r1,w-r,r1-h))
+                    cube.append(NewNurbsCurve(0,r1,r1-h,    l,r1,r1-h))
+                    cube.append(NewNurbsCurve(0,w-r1,r1-h,    l,w-r1,r1-h ))
 
                     
             # form : flach , type : cap       
             else:
-                # up
-                # delta y
-                cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
-                cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
                 # delta x
-                cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
-                cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1 ))
+                cube.append(NewNurbsCurve(0,r1,r1-h,    l,r1,r1-h))
+                cube.append(NewNurbsCurve(0,w-r1,r1-h,    l,w-r1,r1-h ))
+                if side == 'left':
+                    # up
+                    # delta y
+                    #cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
+                    #cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
+                    # delta x
+                    #cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                    #cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1 ))
+                    
+                    # down
+                    # delta y
+                    cube_sec_y.append(NewNurbsCurve(r1_sec,r,r1-h,    r1_sec,w-r,r1-h))
+                    cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
+                    
                 
-                # down
-                # delta y
-                #cube.append(NewNurbsCurve(r1,r,r1-h,    r1,w-r,r1-h))
-                #cube.append(NewNurbsCurve(l-r1,r,r1-h,    l-r1,w-r,r1-h))
-                # delta x
-                #cube.append(NewNurbsCurve(0,r1,r1-h,    l,r1,r1-h))
-                #cube.append(NewNurbsCurve(0,w-r1,r1-h,    l,w-r1,r1-h ))
+                else : 
+                    # up
+                    # delta y
+                    #cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
+                    #cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
+                    # delta x
+                    #cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                    #cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1 ))
+                    
+                    # down
+                    # delta y
+                    cube.append(NewNurbsCurve(r1,r,r1-h,    r1,w-r,r1-h))
+                    cube_sec_y.append(NewNurbsCurve(l-r1_sec,r,r1-h,    l-r1_sec,w-r,r1-h))
+                    
 
                 
 
@@ -330,16 +372,52 @@ def run():
                     
             # form : Dreieck , type : cap      
             else:
-                cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
-                cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
-                cube.append(NewNurbsCurve(l-r1,w-r1,-r,    l-r1,w-r1,-h+r1))
+                if side == 'left' : 
+                    # delta y - right
+                    cube.append(NewNurbsCurve(l-r1,r,-r1,    l-r1,w-r,-r1))
+                    # delta y - left
+                    cube_sec_y.append(NewNurbsCurve(r1_sec,r,-r1,    r1_sec,w-r,-r1))
+                    # delta x
+                    cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                    # delta z - right
+                    cube.append(NewNurbsCurve(l-r1,w-r1,-r,    l-r1,w-r1,-h+r1))
+                    # delta z - left
+                    cube_sec_z.append(NewNurbsCurve(r1_sec,w-r1,-r,    r1_sec,w-r1,-h+r1))
+                    
+                    # delta x - down
+                    cube.append(NewNurbsCurve(0,w-r1,-h+r1, l,w-r1,-h+r1))
+
+                    cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1)) 
+
+                    # dia left
+                    cube_sec_z.append(NewNurbsCurve(r1_sec,0-yy,-r+zz,    r1_sec,w-r-yy,-h+zz))
+                    # dia right
+                    cube.append(NewNurbsCurve(l-r1,0-yy,-r+zz,    l-r1,w-r-yy,-h+zz))
                 
-                cube.append(NewNurbsCurve(l-r1,0-yy,-r+zz,    l-r1,w-r-yy,-h+zz))
-                cube.append(NewNurbsCurve(0,w-r1,-h+r1, l,w-r1,-h+r1))
-                cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1)) 
-                cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
-                cube.append(NewNurbsCurve(r1,w-r1,-r,    r1,w-r1,-h+r1))
-                cube.append(NewNurbsCurve(r1,0-yy,-r+zz,    r1,w-r-yy,-h+zz))
+                else:
+                    # delta y - right
+                    cube_sec_y.append(NewNurbsCurve(l-r1_sec,r,-r1,    l-r1_sec,w-r,-r1))
+                    # delta y - left
+                    cube.append(NewNurbsCurve(r1,r,-r1,    r1,w-r,-r1))
+                    
+                    
+                    # delta x
+                    cube.append(NewNurbsCurve(0,r1,-r1,    l,r1,-r1))
+                    # delta z - right
+                    cube_sec_z.append(NewNurbsCurve(l-r1_sec,w-r1,-r,    l-r1_sec,w-r1,-h+r1))
+                    # delta z - left
+                    cube.append(NewNurbsCurve(r1,w-r1,-r,    r1,w-r1,-h+r1))
+                    
+                    # delta x - down
+                    cube.append(NewNurbsCurve(0,w-r1,-h+r1, l,w-r1,-h+r1))
+
+                    cube.append(NewNurbsCurve(0,w-r1,-r1,    l,w-r1,-r1)) 
+
+                    # dia left
+                    cube.append(NewNurbsCurve(r1,0-yy,-r+zz,    r1,w-r-yy,-h+zz))
+                    # dia right
+                    cube_sec_z.append(NewNurbsCurve(l-r1_sec,0-yy,-r+zz,    l-r1_sec,w-r-yy,-h+zz))
+                    
         
         
         
@@ -380,7 +458,14 @@ def run():
         vs.SetClass(objectHand, class_name)  
         vs.DelObject(rec_1)
         vs.DelObject(rec_2)
+        vs.DelObject(rec_1_sec_y)
+        vs.DelObject(rec_2_sec_z)
+        vs.DelObject(rec_1_sec_z)
+        vs.DelObject(rec_2_sec_y)
+        
         vs.DelObject(profile)
+        vs.DelObject(profile_sec_y)
+        vs.DelObject(profile_sec_z)
         # material 
         vs.SetObjMaterialHandle(structure, mat)
         # 2D representation
